@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMA AI</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            color: var(--tg-theme-text-color, #ffffff);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { color: #8e44ad; margin-bottom: 5px; }
+        .subtitle { font-size: 14px; opacity: 0.8; margin-bottom: 25px; }
+        .card {
+            background: var(--tg-theme-secondary-bg-color, #2c2c2c);
+            border-radius: 15px;
+            padding: 15px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .card:active { transform: scale(0.98); }
+        .card h3 { margin: 0 0 5px 0; color: #3498db; }
+        .card p { margin: 0; font-size: 13px; opacity: 0.7; }
+        .main-btn {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>LUMA AI</h1>
+    <p class="subtitle">Искусственный интеллект в твоем кармане</p>
+
+    <div class="card" onclick="tgAlert('AI Аватар')">
+        <h3>📸 AI Аватар</h3>
+        <p>Создай профиль в стиле киберпанк или аниме</p>
+    </div>
+
+    <div class="card" onclick="tgAlert('Улучшение фото')">
+        <h3>✨ Улучшение</h3>
+        <p>Сделай фото четким и ярким за секунду</p>
+    </div>
+
+    <div class="card" onclick="tgAlert('Генератор идей')">
+        <h3>✍️ Креатив</h3>
+        <p>Сценарии для Reels и посты для соцсетей</p>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // Развернуть на весь экран
+
+        function tgAlert(feature) {
+            tg.showAlert("Скоро здесь появится: " + feature);
+        }
+    </script>
+</body>
+</html>
