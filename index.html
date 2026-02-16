@@ -1,75 +1,116 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMA AI</title>
+    <title>LUMA AI PREMIUM</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            font-family: sans-serif;
-            background-color: var(--tg-theme-bg-color, #1a1a1a);
-            color: var(--tg-theme-text-color, #ffffff);
+            background: radial-gradient(circle at top, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
-        h1 { color: #8e44ad; margin-bottom: 5px; }
-        .subtitle { font-size: 14px; opacity: 0.8; margin-bottom: 25px; }
-        .card {
-            background: var(--tg-theme-secondary-bg-color, #2c2c2c);
-            border-radius: 15px;
-            padding: 15px;
+        h1 { font-size: 28px; margin-bottom: 5px; text-shadow: 0 0 10px #4ecca3; }
+        p { color: #95a5a6; margin-bottom: 25px; }
+
+        .input-group {
             width: 100%;
-            margin-bottom: 15px;
-            border: 1px solid #444;
-            cursor: pointer;
-            transition: transform 0.2s;
+            margin-bottom: 20px;
         }
-        .card:active { transform: scale(0.98); }
-        .card h3 { margin: 0 0 5px 0; color: #3498db; }
-        .card p { margin: 0; font-size: 13px; opacity: 0.7; }
-        .main-btn {
-            background: #8e44ad;
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #4ecca3;
+            background: rgba(255, 255, 255, 0.05);
             color: white;
-            border: none;
-            padding: 15px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
             width: 100%;
-            border-radius: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .card:active { transform: scale(0.95); background: rgba(78, 204, 163, 0.2); }
+        .card h3 { margin: 0; color: #4ecca3; }
+        .card p { margin: 5px 0 0; font-size: 14px; }
+
+        .btn-main {
+            background: #4ecca3;
+            color: #1a1a2e;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
             font-weight: bold;
-            margin-top: 20px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>LUMA AI</h1>
-    <p class="subtitle">Искусственный интеллект в твоем кармане</p>
+    <p>Создавай без границ</p>
 
-    <div class="card" onclick="selectFeature('AI_AVATAR')">
-        <h3>📸 AI Аватар</h3>
-        <p>Создай профиль в стиле киберпанк или аниме</p>
+    <div class="input-group">
+        <input type="text" id="userPrompt" placeholder="Напиши, что нарисовать...">
     </div>
 
-    <div class="card" onclick="selectFeature('AI_ENHANCE')">
-        <h3>✨ Улучшение</h3>
-        <p>Сделай фото четким и ярким за секунду</p>
-    </div>
+    <button class="btn-main" onclick="sendCustomPrompt()">🎨 Сгенерировать по тексту</button>
 
-    <div class="card" onclick="selectFeature('AI_CONTENT')">
-        <h3>✍️ Креатив</h3>
-        <p>Сценарии для Reels и посты для соцсетей</p>
+    <div class="grid">
+        <div class="card" onclick="sendFeature('AI_AVATAR')">
+            <h3>📸 Фото в Аватар</h3>
+            <p>10 звёзд</p>
+        </div>
+        <div class="card" onclick="sendFeature('AI_ENHANCE')">
+            <h3>✨ Улучшить фото</h3>
+            <p>5 звёзд</p>
+        </div>
+        <div class="card" onclick="sendFeature('AI_CONTENT')">
+            <h3>✍️ Контент-план</h3>
+            <p>Бесплатно</p>
+        </div>
     </div>
 
     <script>
-    let tg = window.Telegram.WebApp;
-    tg.expand(); // Развернуть приложение
+        let tg = window.Telegram.WebApp;
+        tg.expand();
 
-    function selectFeature(name) {
-        // Эта команда отправляет данные в бот и закрывает приложение
-        tg.sendData(name); 
-    }
-</script>
+        function sendCustomPrompt() {
+            let prompt = document.getElementById('userPrompt').value;
+            if (prompt.trim() === "") {
+                tg.showAlert("Сначала напиши что-нибудь!");
+                return;
+            }
+            tg.sendData("CUSTOM_" + prompt);
+        }
+
+        function sendFeature(name) {
+            tg.sendData(name);
+        }
+    </script>
 </body>
 </html>
