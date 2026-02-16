@@ -47,28 +47,29 @@
     <h1>LUMA AI</h1>
     <p class="subtitle">Искусственный интеллект в твоем кармане</p>
 
-    <div class="card" onclick="tgAlert('AI Аватар')">
+    <div class="card" onclick="selectFeature('AI_AVATAR')">
         <h3>📸 AI Аватар</h3>
         <p>Создай профиль в стиле киберпанк или аниме</p>
     </div>
 
-    <div class="card" onclick="tgAlert('Улучшение фото')">
+    <div class="card" onclick="selectFeature('AI_ENHANCE')">
         <h3>✨ Улучшение</h3>
         <p>Сделай фото четким и ярким за секунду</p>
     </div>
 
-    <div class="card" onclick="tgAlert('Генератор идей')">
+    <div class="card" onclick="selectFeature('AI_CONTENT')">
         <h3>✍️ Креатив</h3>
         <p>Сценарии для Reels и посты для соцсетей</p>
     </div>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand(); // Развернуть на весь экран
+    let tg = window.Telegram.WebApp;
+    tg.expand(); // Развернуть приложение
 
-        function tgAlert(feature) {
-            tg.showAlert("Скоро здесь появится: " + feature);
-        }
-    </script>
+    function selectFeature(name) {
+        // Эта команда отправляет данные в бот и закрывает приложение
+        tg.sendData(name); 
+    }
+</script>
 </body>
 </html>
